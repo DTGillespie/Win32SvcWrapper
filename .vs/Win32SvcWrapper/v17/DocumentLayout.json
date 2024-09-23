@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\repos\\Win32SvcWrapper\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{650E2B35-8F33-4D24-9DFA-DFF7468639A9}|Win32SvcWrapper.vcxproj|C:\\repos\\Win32SvcWrapper\\svc_wrapper.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{650E2B35-8F33-4D24-9DFA-DFF7468639A9}|Win32SvcWrapper.vcxproj|solutionrelative:svc_wrapper.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "svc_wrapper.cpp",
+              "DocumentMoniker": "C:\\repos\\Win32SvcWrapper\\svc_wrapper.cpp",
+              "RelativeDocumentMoniker": "svc_wrapper.cpp",
+              "ToolTip": "C:\\repos\\Win32SvcWrapper\\svc_wrapper.cpp",
+              "RelativeToolTip": "svc_wrapper.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-23T15:59:56.724Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
