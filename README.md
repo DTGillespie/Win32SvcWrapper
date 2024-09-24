@@ -5,8 +5,6 @@ Win32SvcWrapper is a program that registers a specified binary executable, as de
 ```ini
 [Service]
 Name="ExampleService"
-
-[Exe]
 Path="C:\Path\To\Service\Executable\ExampleService.exe"
 ```
 Note: The config.ini must be located inside the working directory of the binary executable.

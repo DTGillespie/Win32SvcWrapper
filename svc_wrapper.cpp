@@ -4,32 +4,28 @@
 
 SERVICE_STATUS ServiceStatus;
 SERVICE_STATUS_HANDLE hStatus;
+PROCESS_INFORMATION pi;
 
 void WINAPI SvcMain(DWORD argc, LPWSTR* argv);
 void CtrlHandler(DWORD request);
 void StartExe();
 void StopExe();
+void SetWorkingDirectory();
 void ReadConfig();
-std::wstring CharArrayToLPCWSTR(const char* charArray);
 
-PROCESS_INFORMATION pi;
-
-char svcName[260], exePath[260];
-std::wstring wSvcName;
+wchar_t wSvcName[260], wExePath[260];
 
 int main() {
 
+	SetWorkingDirectory();
 	ReadConfig();
 
-	wSvcName = CharArrayToLPCWSTR(svcName);
-
 	SERVICE_TABLE_ENTRY ServiceTable[2];
-	ServiceTable[0].lpServiceName = &wSvcName[0]; // Extract writable buffer wchar_t* from wSvcName
+	ServiceTable[0].lpServiceName = wSvcName;
 	ServiceTable[0].lpServiceProc = SvcMain; // Register SvcMain with SCM
 	ServiceTable[1].lpServiceName = NULL;
 	ServiceTable[1].lpServiceProc = NULL;
 
-	// Start service
 	StartServiceCtrlDispatcher(ServiceTable);
 
 	return 0;
@@ -99,9 +95,7 @@ void StartExe() {
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
 
-	std::wstring wExePath = CharArrayToLPCWSTR(exePath);
-
-	if (!CreateProcess(&wExePath[0], NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) printf("Failed to start executable.\n");
+	if (!CreateProcess(wExePath, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) printf("Failed to start executable.\n");
 }
 
 void StopExe() {
@@ -117,20 +111,21 @@ void StopExe() {
 	}
 }
 
-void ReadConfig() {
-	GetPrivateProfileStringA("Service", "Name", "DefaultService", svcName, sizeof(svcName), "config.ini");
-	GetPrivateProfileStringA("Exe", "Path", "C:\\Path\\To\\DefaultApp.exe", exePath, sizeof(exePath), "config.ini");
+void SetWorkingDirectory() {
+	char wd[MAX_PATH];
+	GetModuleFileNameA(NULL, wd, MAX_PATH);
+
+	char* lastBackslash = strrchr(wd, '\\');
+	if (lastBackslash) {
+		*lastBackslash = '\0';
+		SetCurrentDirectoryA(wd);
+	}
 }
 
-// Convert char* to wstring
-std::wstring CharArrayToLPCWSTR(const char* charArray) {
+void ReadConfig() {
+	wchar_t configPath[MAX_PATH];
+	GetFullPathName(L"config.ini", MAX_PATH, configPath, NULL);
 
-	int len = MultiByteToWideChar(CP_ACP, 0, charArray, -1, NULL, 0);
-	if (len == 0) return L"";
-	
-	std::wstring wString(len, L'\0');
-
-	MultiByteToWideChar(CP_ACP, 0, charArray, -1, &wString[0], len);
-
-	return wString;
+	GetPrivateProfileString(L"Service", L"Name", L"DefaultService", wSvcName, sizeof(wSvcName) / sizeof(wchar_t), configPath);
+	GetPrivateProfileString(L"Service", L"Path", L"C:\\Path\\To\\DefaultApp.exe", wExePath, sizeof(wExePath) / sizeof(wchar_t), configPath);
 }

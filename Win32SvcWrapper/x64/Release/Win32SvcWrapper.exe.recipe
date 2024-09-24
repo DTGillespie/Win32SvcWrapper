@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\repos\Win32SvcWrapper\x64\Release\Win32SvcWrapper.exe</FullPath>
+      <FullPath>C:\repos\win32svcwrapper\x64\Release\Win32SvcWrapper.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
