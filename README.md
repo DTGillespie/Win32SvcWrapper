@@ -1,5 +1,5 @@
 ### Summary
-Win32SvcWrapper is a program that registers a specified binary executable, as defined in the config.ini, with the Windows Service Control Manager.
+Win32SvcWrapper registers a specified binary executable as defined in the config.ini with the Windows Service Control Manager.
 
 ### Configuration Example
 ```ini
